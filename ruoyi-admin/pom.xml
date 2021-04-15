@@ -83,6 +83,12 @@
             <artifactId>ruoyi-demo</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>service</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -102,15 +108,15 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>   
-                <groupId>org.apache.maven.plugins</groupId>   
-                <artifactId>maven-war-plugin</artifactId>   
-                <version>3.1.0</version>   
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <warName>${project.artifactId}</warName>
-                </configuration>   
-           </plugin>   
+                </configuration>
+           </plugin>
         </plugins>
         <finalName>${project.artifactId}</finalName>
     </build>
