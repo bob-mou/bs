@@ -14,11 +14,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="patientName" column="patient_name"/>
     </resultMap>
     <sql id="selectCollectVo">
-         select ctable.*,dtable.nick_name as doctor_name from
-         (select atable.*,btable.nick_name as patient_name  from
-         (select patient_ID, doctor_ID, creat_time, status, remark from Collect) as atable  join
-         (select sys_user.* from sys_user where sys_user.user_type=104 ) as btable on btable.user_id=atable.patient_ID)as ctable join
-         (select sys_user.* from sys_user where sys_user.user_type=100) as dtable  on dtable.user_id=ctable.doctor_ID
+         select btable.*,sys_user.nick_name as doctor_name from
+        ((select atable.*,sys_user.nick_name as patient_name  from
+        ((select patient_ID, doctor_ID, creat_time, status, remark from Collect) as atable)
+         join sys_user on sys_user.user_id=atable.patient_ID) as btable)
+         join sys_user on sys_user.user_id=btable.doctor_ID
     </sql>
+
+    <select id="selectCollectList" parameterType="Collect" resultMap="CollectResult">
+        <include refid="selectCollectVo"/>
+        <where>
+            <if test="patientId != null  and patientId != ''"> and patient_ID = = #{patientId}</if>
+            <if test="doctorId != null  and doctorId != ''"> and doctor_ID = = #{doctorId}</if>
+            <if test="doctorName != null  and doctorName != ''"> and nick_name like concat('%', #{doctorName}, '%')</if>
+            <if test="status != null "> and btable.status = #{status}</if>
+        </where>
+    </select>
+
 
 </mapper>

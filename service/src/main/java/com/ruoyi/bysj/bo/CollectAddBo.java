@@ -35,4 +35,5 @@ public class CollectAddBo {
     /** 备注 */
     @ApiModelProperty("备注")
     private String remark;
+
 }

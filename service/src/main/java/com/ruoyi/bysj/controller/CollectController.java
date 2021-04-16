@@ -3,6 +3,7 @@ package com.ruoyi.bysj.controller;
 import java.util.List;
 import java.util.Arrays;
 
+import com.ruoyi.bysj.domain.Collect;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * 收藏管理Controller
- * 
+ *
  * @author 牟连波
  * @date 2021-04-11
  */
@@ -48,9 +49,9 @@ public class CollectController extends BaseController {
     @ApiOperation("查询收藏管理列表")
     @PreAuthorize("@ss.hasPermi('bysj:collect:list')")
     @GetMapping("/list")
-    public TableDataInfo<CollectVo> list(CollectQueryBo bo) {
+    public TableDataInfo<Collect> list(Collect bo) {
         startPage();
-        List<CollectVo> list = iCollectService.queryList(bo);
+        List<Collect> list = iCollectService.selectCollectList(bo);
         return getDataTable(list);
     }
 
@@ -61,9 +62,9 @@ public class CollectController extends BaseController {
     @PreAuthorize("@ss.hasPermi('bysj:collect:export')")
     @Log(title = "收藏管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult<CollectVo> export(CollectQueryBo bo) {
-        List<CollectVo> list = iCollectService.queryList(bo);
-        ExcelUtil<CollectVo> util = new ExcelUtil<CollectVo>(CollectVo.class);
+    public AjaxResult<Collect> export(Collect bo) {
+        List<Collect> list = iCollectService.selectCollectList(bo);
+        ExcelUtil<Collect> util = new ExcelUtil<Collect>(Collect.class);
         return util.exportExcel(list, "collect" );
     }
 

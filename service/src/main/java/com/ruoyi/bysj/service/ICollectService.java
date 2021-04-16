@@ -29,6 +29,12 @@ public interface ICollectService extends IService<Collect> {
 	List<CollectVo> queryList(CollectQueryBo bo);
 
 	/**
+	 * 查询列表
+	 * @return
+	 */
+	List<Collect> selectCollectList(Collect bo);
+
+	/**
 	 * 根据新增业务对象插入收藏管理
 	 * @param bo 收藏管理新增业务对象
 	 * @return

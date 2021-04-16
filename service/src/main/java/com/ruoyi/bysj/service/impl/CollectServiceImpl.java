@@ -2,6 +2,7 @@ package com.ruoyi.bysj.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -16,7 +17,6 @@ import com.ruoyi.bysj.vo.CollectVo;
 import com.ruoyi.bysj.service.ICollectService;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +28,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> implements ICollectService {
+
+    @Autowired
+    private CollectMapper collectMapper;
 
     @Override
     public CollectVo queryById(Long patientId){
@@ -41,6 +44,11 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         lqw.eq(bo.getDoctorId() != null, Collect::getDoctorId, bo.getDoctorId());
         lqw.eq(StrUtil.isNotBlank(bo.getStatus()), Collect::getStatus, bo.getStatus());
         return entity2Vo(this.list(lqw));
+    }
+
+    @Override
+    public List<Collect> selectCollectList(Collect bo) {
+        return collectMapper.selectCollectList(bo);
     }
 
     /**

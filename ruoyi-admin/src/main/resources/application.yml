@@ -64,7 +64,7 @@ spring:
   messages:
     # 国际化资源文件路径
     basename: i18n/messages
-  profiles: 
+  profiles:
     active: @profiles.active@
   # 文件上传
   servlet:
@@ -87,7 +87,7 @@ token:
     secret: abcdefghijklmnopqrstuvwxyz
     # 令牌有效期（默认30分钟）
     expireTime: 30
-  
+
 # MyBatis配置
 # https://baomidou.com/config/
 mybatis-plus:
@@ -177,11 +177,11 @@ mybatis-plus:
       selectStrategy: NOT_NULL
 
 # PageHelper分页插件
-pagehelper: 
+pagehelper:
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
-  params: count=countSql 
+  params: count=countSql
 
 # Swagger配置
 swagger:
@@ -191,7 +191,7 @@ swagger:
   pathMapping: /dev-api
 
 # 防止XSS攻击
-xss: 
+xss:
   # 过滤开关
   enabled: true
   # 排除链接（多个用逗号分隔）

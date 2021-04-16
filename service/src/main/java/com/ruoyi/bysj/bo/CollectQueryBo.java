@@ -37,14 +37,10 @@ public class CollectQueryBo extends BaseEntity {
 	@ApiModelProperty(value = "排序的方向", example = "asc,desc")
 	private String isAsc;
 
+
 	/** 医生ID号 */
 	@ApiModelProperty("医生ID号")
 	private Long doctorId;
-
-	/** 患者用户id号 */
-	@ApiModelProperty("患者用户id号")
-	private Long patientId;
-
 	/** 状态 */
 	@ApiModelProperty("状态")
 	private String status;

@@ -1,6 +1,7 @@
 package com.ruoyi.bysj.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -26,13 +27,14 @@ private static final long serialVersionUID=1L;
 
 
     /** 患者用户id号 */
-    @TableId(value = "patient_ID")
+    @TableId(value = "patient_ID" ,type = IdType.ASSIGN_ID)
     private Long patientId;
 
     /** 医生ID号 */
     private Long doctorId;
 
     /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date creatTime;
 
     /** 状态 */
@@ -42,9 +44,12 @@ private static final long serialVersionUID=1L;
     private String remark;
 
     /** 医生姓名 */
+    @TableField(exist = false)
     private String doctorName;
 
     /** 患者用户姓名 */
+    @TableField(exist = false)
     private String patientName;
+
 
 }

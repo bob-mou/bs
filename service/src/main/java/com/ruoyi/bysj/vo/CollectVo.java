@@ -46,7 +46,7 @@ public class CollectVo {
 
 
 	/** 创建时间 */
-	@Excel(name = "创建时间" , width = 30, dateFormat = "yyyy-MM-dd")
+	@Excel(name = "创建时间" , width = 30, dateFormat = "yyyy-MM-dd  HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@ApiModelProperty("创建时间")
 	private Date creatTime;
