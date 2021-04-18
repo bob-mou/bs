@@ -49,9 +49,9 @@ public class RelationController extends BaseController {
     @ApiOperation("查询家庭成员管理列表")
     @PreAuthorize("@ss.hasPermi('bysj:relation:list')")
     @GetMapping("/list")
-    public TableDataInfo<RelationVo> list(RelationQueryBo bo) {
+    public TableDataInfo<Relation> list(Relation bo) {
         startPage();
-        List<RelationVo> list = iRelationService.queryList(bo);
+        List<Relation> list = iRelationService.queryList(bo);
         return getDataTable(list);
     }
 
@@ -62,9 +62,9 @@ public class RelationController extends BaseController {
     @PreAuthorize("@ss.hasPermi('bysj:relation:export')")
     @Log(title = "家庭成员管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult<RelationVo> export(RelationQueryBo bo) {
-        List<RelationVo> list = iRelationService.queryList(bo);
-        ExcelUtil<RelationVo> util = new ExcelUtil<RelationVo>(RelationVo.class);
+    public AjaxResult<Relation> export(Relation bo) {
+        List<Relation> list = iRelationService.queryList(bo);
+        ExcelUtil<Relation> util = new ExcelUtil<Relation>(Relation.class);
         return util.exportExcel(list, "relation" );
     }
 

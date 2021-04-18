@@ -45,12 +45,8 @@ public class RelationServiceImpl extends ServiceImpl<RelationMapper, Relation> i
     }
 
     @Override
-    public List<RelationVo> queryList(RelationQueryBo bo) {
-        LambdaQueryWrapper<Relation> lqw = Wrappers.lambdaQuery();
-        lqw.like(bo.getUserId() != null, Relation::getUserId, bo.getUserId());
-        lqw.like(bo.getFamalyId() != null, Relation::getFamalyId, bo.getFamalyId());
-        lqw.eq(StrUtil.isNotBlank(bo.getStatus()), Relation::getStatus, bo.getStatus());
-        return entity2Vo(this.list(lqw));
+    public List<Relation> queryList(Relation bo) {
+        return relationMapper.queryList(bo);
     }
 
     /**

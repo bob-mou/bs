@@ -30,6 +30,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null "> and btable.status = #{status}</if>
         </where>
     </select>
-
+    <select id="queryList" parameterType="Relation" resultMap="RelationResult">
+        <include refid="selectRelationVo"/>
+        <where>
+            <if test="userId != null  and userId != ''"> and atable.user_id = #{userId}</if>
+            <if test="famalyId != null  and famalyId != ''"> and sys_user.user_id =#{famalyId}</if>
+            <if test="familyName != null  and familyName != ''"> and sys_user.nick_name like concat('%', #{familyName}, '%')</if>
+            <if test="status != null "> and btable.status = #{status}</if>
+        </where>
+    </select>
 
 </mapper>

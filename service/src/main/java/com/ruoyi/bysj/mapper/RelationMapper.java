@@ -3,6 +3,7 @@ package com.ruoyi.bysj.mapper;
 import com.ruoyi.bysj.domain.Collect;
 import com.ruoyi.bysj.domain.Relation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ruoyi.bysj.domain.Ticket;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ import java.util.List;
  */
 public interface RelationMapper extends BaseMapper<Relation> {
     public Relation selectRelation(Relation relation);
+
+    public List<Relation> queryList(Relation bo);
 }

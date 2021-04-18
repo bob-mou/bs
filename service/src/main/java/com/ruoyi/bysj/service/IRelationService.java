@@ -33,7 +33,7 @@ public interface IRelationService extends IService<Relation> {
 	/**
 	 * 查询列表
 	 */
-	List<RelationVo> queryList(RelationQueryBo bo);
+	List<Relation> queryList(Relation bo);
 
 	/**
 	 * 根据新增业务对象插入家庭成员管理
