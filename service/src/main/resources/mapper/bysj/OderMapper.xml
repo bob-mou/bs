@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bysj.mapper.OderMapper">
+
+    <resultMap type="com.ruoyi.bysj.domain.Oder" id="OderResult">
+        <result property="userId" column="user_ID"/>
+        <result property="doctorId" column="doctor_ID"/>
+        <result property="yuyueTime" column="yuyue_time"/>
+        <result property="isam" column="isam"/>
+        <result property="payMuch" column="pay_much"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="payWay" column="pay_way"/>
+        <result property="iscome" column="iscome"/>
+        <result property="star" column="star"/>
+        <result property="messageHospital" column="message_hospital"/>
+        <result property="messageSys" column="message_sys"/>
+        <result property="creatDate" column="creat_date"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+
+</mapper>

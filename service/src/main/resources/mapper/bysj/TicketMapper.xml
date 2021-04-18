@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bysj.mapper.TicketMapper">
+
+    <resultMap type="com.ruoyi.bysj.domain.Ticket" id="TicketResult">
+        <result property="doctorId" column="doctor_ID"/>
+        <result property="doctorName" column="doctor_name"/>
+        <result property="yuyueTime" column="yuyue_time"/>
+        <result property="isam" column="isam"/>
+        <result property="numberAll" column="number_all"/>
+        <result property="numberLast" column="number_last"/>
+        <result property="createTime" column="create_time"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+    <sql id="selectTicketVo">
+        SELECT ticket.*,sys_user.nick_name as doctor_name  FROM ticket join sys_user on sys_user.user_id=ticket.doctor_ID
+    </sql>
+
+    <select id="selectTicketList" parameterType="Ticket" resultMap="TicketResult">
+        <include refid="selectTicketVo"/>
+        <where>
+            <if test="doctorId != null  and doctorId != ''"> and ticket.doctor_ID = = #{doctorId}</if>
+            <if test="doctorName != null  and doctorName != ''"> and sys_user.nick_name like concat('%', #{doctorName}, '%')</if>
+            <if test="createTime != null "> and createTime = #{createTime}</if>
+            <if test="isam != null "> and isam = #{isam}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+
+</mapper>

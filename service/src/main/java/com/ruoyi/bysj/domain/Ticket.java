@@ -9,48 +9,52 @@ import java.io.Serializable;
 import java.util.Date;
 import java.math.BigDecimal;
 import com.ruoyi.common.annotation.Excel;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 /**
- * 收藏管理对象 collect
+ * 放号管理对象 ticket
  *
  * @author 牟连波
- * @date 2021-04-11
+ * @date 2021-04-18
  */
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-@TableName("collect")
-public class Collect implements Serializable {
+@TableName("ticket")
+public class Ticket implements Serializable {
 
 private static final long serialVersionUID=1L;
 
 
-    /** 患者用户id号 */
-    @TableId(value = "patient_ID" ,type = IdType.ASSIGN_ID)
-    private Long patientId;
-
-    /** 医生ID号 */
+    /** 医生id号 */
+    @TableId(value = "doctor_ID")
     private Long doctorId;
-
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    private Date creatTime;
-
-    /** 状态 */
-    private String status;
-
-    /** 备注 */
-    private String remark;
 
     /** 医生姓名 */
     @TableField(exist = false)
     private String doctorName;
 
-    /** 患者用户姓名 */
-    @TableField(exist = false)
-    private String patientName;
+    /** 预约日期 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date yuyueTime;
 
+    /** 上午下午 */
+    private Integer isam;
+
+    /** 放号数量 */
+    private Long numberAll;
+
+    /** 剩余数量 */
+    private Long numberLast;
+
+    /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+
+    /** 状态 */
+    private Integer status;
+
+    /** 备注 */
+    private String remark;
 
 }
