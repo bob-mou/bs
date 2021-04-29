@@ -24,12 +24,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectCollectList" parameterType="Collect" resultMap="CollectResult">
         <include refid="selectCollectVo"/>
         <where>
-            <if test="patientId != null  and patientId != ''"> and patient_ID = = #{patientId}</if>
-            <if test="doctorId != null  and doctorId != ''"> and doctor_ID = = #{doctorId}</if>
+            <if test="patientId != null  and patientId != ''"> and patient_ID = #{patientId}</if>
+            <if test="doctorId != null  and doctorId != ''"> and doctor_ID = #{doctorId}</if>
             <if test="doctorName != null  and doctorName != ''"> and nick_name like concat('%', #{doctorName}, '%')</if>
             <if test="status != null "> and btable.status = #{status}</if>
         </where>
     </select>
-
 
 </mapper>

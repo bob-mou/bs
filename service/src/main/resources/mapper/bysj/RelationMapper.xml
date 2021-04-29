@@ -30,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null "> and btable.status = #{status}</if>
         </where>
     </select>
+
     <select id="queryList" parameterType="Relation" resultMap="RelationResult">
         <include refid="selectRelationVo"/>
         <where>
