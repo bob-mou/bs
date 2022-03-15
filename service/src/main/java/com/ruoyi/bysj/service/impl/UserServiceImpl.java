@@ -34,8 +34,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private UserMapper userMapper;
 
     @Override
+    public List<User>  docListInA(Long deptId){
+        return userMapper.docListInA(deptId);
+    }
+
+    @Override
     public User selectUser(String phonenumber) {
         return userMapper.selectUser(phonenumber);
+    }
+
+    @Override
+    public List<User> getDoList() {
+        return userMapper.getDoList();
     }
 
     @Override

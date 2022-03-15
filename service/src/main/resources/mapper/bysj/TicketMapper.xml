@@ -26,7 +26,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="doctorName != null  and doctorName != ''"> and sys_user.nick_name like concat('%', #{doctorName}, '%')</if>
             <if test="createTime != null "> and createTime = #{createTime}</if>
             <if test="isam != null "> and isam = #{isam}</if>
-            <if test="status != null "> and status = #{status}</if>
+            <if test="status != null "> and ticket.status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="queryDocId" parameterType="Long" resultMap="TicketResult">
+        <include refid="selectTicketVo"/>
+        <where>
+            <if test="doctorId != null  and doctorId != ''"> ticket.doctor_ID =#{doctorId}</if>
+            and  ticket.yuyue_time >= CURDATE()  and ticket.number_last >0
         </where>
     </select>
 

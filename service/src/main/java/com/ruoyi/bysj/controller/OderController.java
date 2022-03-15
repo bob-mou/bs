@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * 订单信息Controller
- * 
+ *
  * @author 牟连波
  * @date 2021-04-16
  */
@@ -107,6 +107,17 @@ public class OderController extends BaseController {
     @Log(title = "订单信息" , businessType = BusinessType.DELETE)
     @DeleteMapping("/{userIds}")
     public AjaxResult<Void> remove(@PathVariable Long[] userIds) {
+        return toAjax(iOderService.deleteWithValidByIds(Arrays.asList(userIds), true) ? 1 : 0);
+    }
+
+    /**
+     * 记录订单信息
+     */
+    @ApiOperation("记录订单信息")
+    @Log(title = "订单信息" , businessType = BusinessType.DELETE)
+    @DeleteMapping("/jilu/{userIds}")
+    public AjaxResult<Void> jilu(@PathVariable Long[] userIds) {
+
         return toAjax(iOderService.deleteWithValidByIds(Arrays.asList(userIds), true) ? 1 : 0);
     }
 }

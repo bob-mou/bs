@@ -1,7 +1,10 @@
 package com.ruoyi.bysj.controller;
-import com.ruoyi.bysj.bo.UserQueryBo;
+import com.ruoyi.bysj.domain.Dept;
+import com.ruoyi.bysj.domain.Relation;
 import com.ruoyi.bysj.domain.User;
-import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.bysj.service.IDeptService;
+import com.ruoyi.bysj.service.IRelationService;
+import com.ruoyi.bysj.vo.UserVo;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.bysj.service.IUserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.List;
 /**
  * 患者管理Controller
  *
@@ -30,39 +35,82 @@ public class UserController {
 
     @Autowired
     private ISysUserService userService;
+
+    @Autowired
+    private IDeptService DeptService;
+
+    @Autowired
+    private  IRelationService iRelationService;
+
     /**
-     * 查询患者管理列表
+     * 患者用户登录
      */
     @RequestMapping("/login")
-    public String login(@RequestParam(value = "mobile") String mobile,
+    public AjaxResult<User> login(@RequestParam(value = "mobile") String mobile,
                        @RequestParam(value = "password") String password) {
-        System.out.println(mobile);
-        System.out.println(password);
         User user=new User();
-        user.setPhonenumber(mobile);
-        if(password.equals(null)|| password.equals("")){
-            return "500";
+        String msg = new String();
+        if(password.equals(null)|| password.equals("")||mobile.equals(null)||mobile.equals("")){
+            return AjaxResult.error("账号密码不能为空",new User());
         };
-        User u =new User();
         try {
-            u  =iUserService.selectUser(mobile);
+            user=iUserService.selectUser(mobile);
+            if(!passwordEncoder.matches(password,user.getPassword())){
+                return AjaxResult.error("密码不正确，请重新输入密码！",new User());
+            };
+            msg="200";
         }catch (NullPointerException e){
             System.out.println(e);
-            return "500";
+            return AjaxResult.error("账号不存在，请先注册",new User());
         };
-        if(!passwordEncoder.matches(password,u.getPassword())){
-            return "500";
-        };
-        return "200";
+        return AjaxResult.success(msg,user);
     }
 
     /**
-     * 查询患者管理列表
+     * 获取医院推荐信息列表
      * @return
      */
+    @GetMapping("/hospitalList")
+    public List<Dept> hospitalList() {
+        return DeptService.getHList();
+    }
 
-    @GetMapping("/test")
-    public AjaxResult<Void> test() {
-        return AjaxResult.success("fbusbudevufu");
+    /**
+     * 获取医生推荐信息列表
+     * @return
+     */
+    @GetMapping("/doctorList")
+    public List<User> doctorList() {
+        List<User> userList = iUserService.getDoList();
+        return userList;
+    }
+
+    /**
+     * 获取部门下医生信息列表
+     * @return
+     */
+    @GetMapping("/docListInA")
+    public List<User> docListInA(@RequestParam(value = "deptId") Long deptId) {
+        return iUserService.docListInA(deptId);
+    }
+
+    /**
+     * 获取一个医生的详细信息
+     * @return
+     */
+    @GetMapping("/docDetail")
+    public UserVo docDetail(@RequestParam(value = "id") Long id) {
+        return iUserService.queryById(id);
+    }
+
+    /**
+     * 获取一个医生的家人信息列表
+     * @return
+     */
+    @GetMapping("/familyList")
+    public List<Relation> familyList(@RequestParam(value = "id") Long id) {
+        Relation relation=new Relation();
+        relation.setUserId(id);
+        return iRelationService.queryList(relation);
     }
 }

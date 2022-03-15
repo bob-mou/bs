@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bysj.mapper.DeptMapper">
+
+    <resultMap type="com.ruoyi.bysj.domain.Dept" id="DeptResult">
+        <result property="deptId" column="dept_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="ancestors" column="ancestors"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="orderNum" column="order_num"/>
+        <result property="leader" column="leader"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="status" column="status"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="introduce" column="introduce"/>
+        <result property="position" column="position"/>
+        <result property="picUrl" column="pic_url"/>
+        <result property="rank" column="rank"/>
+        <result property="star" column="star"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="oderNum" column="oder_num"/>
+    </resultMap>
+
+     <select id="getHList"   resultMap="DeptResult">
+        SELECT * FROM bs.sys_dept where ancestors like '0,100,211' order by bs.sys_dept.star DESC limit 12;
+     </select>
+
+    <select id="deptDetail"   parameterType="Long" resultMap="DeptResult">
+        SELECT * FROM bs.sys_dept where parent_id=#{deptId};
+     </select>
+
+</mapper>

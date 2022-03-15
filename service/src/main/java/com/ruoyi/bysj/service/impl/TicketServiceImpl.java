@@ -34,6 +34,11 @@ public class TicketServiceImpl extends ServiceImpl<TicketMapper, Ticket> impleme
     private TicketMapper ticketMapper;
 
     @Override
+    public List<Ticket> queryDocId(Long id){
+        return ticketMapper.queryDocId(id);
+    };
+
+    @Override
     public List<Ticket> selectTicketList(Ticket bo) {
         return ticketMapper.selectTicketList(bo);
     }

@@ -14,4 +14,7 @@ import java.util.List;
  */
 public interface TicketMapper extends BaseMapper<Ticket> {
     public List<Ticket> selectTicketList(Ticket bo);
+
+    public List<Ticket> queryDocId(Long id);
+
 }

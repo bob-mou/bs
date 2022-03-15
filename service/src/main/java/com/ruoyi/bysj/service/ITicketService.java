@@ -17,6 +17,12 @@ import java.util.List;
  * @date 2021-04-18
  */
 public interface ITicketService extends IService<Ticket> {
+
+	/**
+	 * 查询一个医生放号信息
+	 */
+	public List<Ticket> queryDocId(Long id);
+
 	/**
 	 * 查询列表
 	 */

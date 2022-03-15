@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="com.ruoyi.bysj.domain.User" id="UserResult">
         <result property="userId" column="user_id"/>
         <result property="deptId" column="dept_id"/>
+        <result property="deptName" column="dept_name"/>
         <result property="userName" column="user_name"/>
         <result property="nickName" column="nick_name"/>
         <result property="userType" column="user_type"/>
@@ -25,15 +26,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
         <result property="introduce" column="introduce"/>
+        <result property="stars" column="stars"/>
+        <result property="rank" column="rank"/>
+        <result property="oderNum" column="oder_num"/>
     </resultMap>
 
     <sql id="selectUserVo">
-        SELECT user_id,dept_id,user_name,user_type,phonenumber,password,avatar FROM bs.sys_user
+        SELECT * FROM bs.sys_user
     </sql>
 
     <select id="selectUser" parameterType="String" resultMap="UserResult">
-         SELECT user_id,dept_id,user_name,nick_name,user_type,email,phonenumber,sex,password,avatar ,status,login_ip,remark,introduce,remark
-         FROM bs.sys_user where phonenumber = #{phonenumber}
+         SELECT * FROM bs.sys_user where phonenumber = #{phonenumber}
+    </select>
+
+    <select id="getDoList" parameterType="String" resultMap="UserResult">
+         SELECT bs.sys_user.*,atable.dept_name
+         FROM bs.sys_user join
+         ((SELECT * FROM bs.sys_dept where ancestors like '0,100,211,%') as atable )
+         on  atable.dept_id=bs.sys_user.dept_id
+         order by bs.sys_user.stars DESC
+         limit 12;
+    </select>
+
+    <select id="docListInA" parameterType="Long" resultMap="UserResult">
+         SELECT *
+         FROM bs.sys_user where dept_id = #{deptId}
+         order by bs.sys_user.stars DESC
     </select>
 
 </mapper>

@@ -83,5 +83,16 @@ public class UserVo {
 	@Excel(name = "医生简介")
 	@ApiModelProperty("医生简介")
 	private String introduce;
-
+	/** 综合评分 */
+	@Excel(name = "综合评分")
+	@ApiModelProperty("综合评分")
+	private String stars;
+	/** 职称 */
+	@Excel(name = "职称")
+	@ApiModelProperty("职称")
+	private String rank;
+	/** 预约次数 */
+	@Excel(name = "预约次数")
+	@ApiModelProperty("预约次数")
+	private Date yuyue_num;
 }

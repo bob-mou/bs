@@ -19,17 +19,27 @@ import java.util.List;
 public interface IUserService extends IService<User> {
 
 	/**
-	 * 查询单个
+	 * 查询同一个部门医生的信息
 	 * @return
 	 */
-	User selectUser(String phonenumber);
+	List<User>  docListInA(Long deptId);
 
 	/**
 	 * 查询单个
 	 * @return
 	 */
-	UserVo queryById(Long userId);
 
+	User selectUser(String phonenumber);
+	/**
+	 * 获取医生推荐列表
+	 * @return
+	 */
+	List<User> getDoList();
+	/**
+	 * 查询单个
+	 * @return
+	 */
+	UserVo queryById(Long userId);
 
 	/**
 	 * 查询列表
